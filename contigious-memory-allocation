@@ -1,0 +1,229 @@
+#include<stdio.h>
+#define max 50
+void bestfit()
+{
+    int mem_block[max],process[max],i,j,blocks,no_of_process,temp,lowest=10000,frag[max];
+ static int first_fit[max],inter_frag = 0;
+
+ printf("\n\t***Contigious Memory Allocation Using Best Fit***");
+ printf("\nEnter the number of Available Memory Blocks:");
+ scanf("%d",&blocks);
+ printf("Enter the number of Processes:");
+ scanf("%d",&no_of_process);
+ printf("\nEnter the size of the Each Memory Block one by one :-\n");
+ for(i=1;i<=blocks;i++) {
+   printf("Block %d:",i);
+   scanf("%d",&mem_block[i]);
+   first_fit[i] = i;
+ }
+ printf("Enter the size of the Each Processes one by one :-\n");
+
+ for(i=1;i<=no_of_process;i++) {
+   printf("Process %d:",i);
+   scanf("%d",&process[i]);
+ }
+int y,m,z,temp1,flag;
+for(y=1;y<=blocks;y++)
+  {
+    for(z=y;z<=blocks;z++)
+    {
+      if(mem_block[y]>mem_block[z])
+      {
+        temp=mem_block[y];
+        mem_block[y]=mem_block[z];
+        mem_block[z]=temp;
+        temp1=first_fit[y];
+        first_fit[y]=first_fit[z];
+        first_fit[z]=temp1;
+      }
+    }
+  }
+  int flagn[max];
+  int exter_frag = 0;
+
+    printf("\n\nProcess_No\tProcess_Size\tBlock_No\tBlock_Size\tFragment\n");
+    for(i=1;i<=no_of_process;i++)
+    {
+      flag = 1;
+      for(j=1;j<=blocks;j++)
+      {
+        if(process[i] <= mem_block[j]){
+          flagn[j] = 1;
+          printf("%-15d\t%-15d\t%-15d\t%-15d\t",i, process[i],first_fit[j],mem_block[j]);
+          mem_block[j] = mem_block[j] - process[i];
+          inter_frag = inter_frag + mem_block[j];
+          printf("%-15d\n",mem_block[j]);
+          break;
+        }
+        else
+        {flagn[j] = 0;
+        flag++;
+        }
+      }
+      if(flag > blocks)
+      printf("%-15d\t%-15d\t%-15s\t%-15s\t%-15s\n",i, process[i],"WAIT","WAIT","WAIT");
+    }
+    printf("Internal Fragmentation = %d",inter_frag );
+    for (j= 1; j <=blocks; j++) {
+      if (flagn[j] != 1)
+          exter_frag = exter_frag + mem_block[j];
+            /* code */
+    }
+    printf("\nExternal Fragmentation = %d\n",exter_frag);
+
+}
+void worstfit()
+{
+    int mem_block[max],process[max],i,j,blocks,no_of_process,temp,lowest=10000,frag[max];
+ static int first_fit[max],inter_frag = 0;
+
+ printf("\n\t***Contigious Memory Allocation Using Worst Fit***");
+ printf("\nEnter the number of Available Memory Blocks:");
+ scanf("%d",&blocks);
+ printf("Enter the number of Processes:");
+ scanf("%d",&no_of_process);
+ printf("\nEnter the size of the Each Memory Block one by one :-\n");
+ for(i=1;i<=blocks;i++) {
+   printf("Block %d:",i);
+   scanf("%d",&mem_block[i]);
+   first_fit[i] = i;
+ }
+ printf("Enter the size of the Each Processes one by one :-\n");
+
+ for(i=1;i<=no_of_process;i++) {
+   printf("Process %d:",i);
+   scanf("%d",&process[i]);
+ }
+int y,m,z,temp1,flag;
+for(y=1;y<=blocks;y++)
+  {
+    for(z=y;z<=blocks;z++)
+    {
+      if(mem_block[y]<mem_block[z])
+      {
+        temp=mem_block[y];
+        mem_block[y]=mem_block[z];
+        mem_block[z]=temp;
+        temp1=first_fit[y];
+        first_fit[y]=first_fit[z];
+        first_fit[z]=temp1;
+      }
+    }
+  }
+  int flagn[max];
+  int exter_frag = 0;
+
+    printf("\n\nProcess_No\tProcess_Size\tBlock_No\tBlock_Size\tFragment\n");
+    for(i=1;i<=no_of_process;i++)
+    {
+      flag = 1;
+      for(j=1;j<=blocks;j++)
+      {
+        if(process[i] <= mem_block[j]){
+          flagn[j] = 1;
+          printf("%-15d\t%-15d\t%-15d\t%-15d\t",i, process[i],first_fit[j],mem_block[j]);
+          mem_block[j] = mem_block[j] - process[i];
+          inter_frag = inter_frag + mem_block[j];
+          printf("%-15d\n",mem_block[j]);
+          break;
+        }
+        else
+        {flagn[j] = 0;
+        flag++;
+        }
+      }
+      if(flag > blocks)
+      printf("%-15d\t%-15d\t%-15s\t%-15s\t%-15s\n",i, process[i],"WAIT","WAIT","WAIT");
+    }
+    printf("Internal Fragmentation = %d",inter_frag );
+    for (j= 1; j <=blocks; j++) {
+      if (flagn[j] != 1)
+          exter_frag = exter_frag + mem_block[j];
+            /* code */
+    }
+    printf("\nExternal Fragmentation = %d\n",exter_frag);
+
+}
+void firstfit()
+{
+    int mem_block[max],process[max],i,j,blocks,no_of_process,temp,lowest=10000,frag[max];
+ static int first_fit[max],inter_frag = 0;
+
+ printf("\n\t***Contigious Memory Allocation Using First Fit***");
+ printf("\nEnter the number of Available Memory Blocks:");
+ scanf("%d",&blocks);
+ printf("Enter the number of Processes:");
+ scanf("%d",&no_of_process);
+ printf("\nEnter the size of the Each Memory Block one by one :-\n");
+ for(i=1;i<=blocks;i++) {
+   printf("Block %d:",i);
+   scanf("%d",&mem_block[i]);
+   first_fit[i] = i;
+ }
+ printf("Enter the size of the Each Processes one by one :-\n");
+
+ for(i=1;i<=no_of_process;i++) {
+   printf("Process %d:",i);
+   scanf("%d",&process[i]);
+ }
+int y,m,z,temp1,flag;
+  int flagn[max];
+  int exter_frag = 0;
+
+    printf("\n\nProcess_No\tProcess_Size\tBlock_No\tBlock_Size\tFragment\n");
+    for(i=1;i<=no_of_process;i++)
+    {
+      flag = 1;
+      for(j=1;j<=blocks;j++)
+      {
+        if(process[i] <= mem_block[j]){
+          flagn[j] = 1;
+          printf("%-15d\t%-15d\t%-15d\t%-15d\t",i, process[i],first_fit[j],mem_block[j]);
+          mem_block[j] = mem_block[j] - process[i];
+          inter_frag = inter_frag + mem_block[j];
+          printf("%-15d\n",mem_block[j]);
+          break;
+        }
+        else
+        {flagn[j] = 0;
+        flag++;
+        }
+      }
+      if(flag > blocks)
+      printf("%-15d\t%-15d\t%-15s\t%-15s\t%-15s\n",i, process[i],"WAIT","WAIT","WAIT");
+    }
+    printf("Internal Fragmentation = %d",inter_frag );
+    for (j= 1; j <=blocks; j++) {
+      if (flagn[j] != 1)
+          exter_frag = exter_frag + mem_block[j];
+            /* code */
+    }
+    printf("\nExternal Fragmentation = %d\n",exter_frag);
+
+}
+void main()
+{
+    printf("Choose any one memory allocation technique: \n");
+    printf("1. Best Fit \n");
+    printf("2. Worst Fit \n");
+    printf("3. First Fit \n");
+    printf("Choosed Option: ");
+    int x;
+    scanf("%d",&x);
+    if(x==1)
+    {
+        bestfit();
+    }
+    else if(x==2)
+    {
+        worstfit();
+    }
+    else if(x==3)
+    {
+        firstfit();
+    }
+    else
+    {
+        printf("You choose wrong option");
+    }
+}
