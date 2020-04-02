@@ -203,7 +203,7 @@ int y,m,z,temp1,flag;
 }
 void main()
 {
-    printf("Choose any one memory allocation technique: \n");
+    printf("Choose any one memory allocation technique:  \n");
     printf("1. Best Fit \n");
     printf("2. Worst Fit \n");
     printf("3. First Fit \n");
